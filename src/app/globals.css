@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
 :root {
+  /* Base */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+
+  /* Brand */
+  --brand: #2563eb;
+  --brand-hover: #1d4ed8;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --surface-dark: #0f172a;
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+
+  /* Borders */
+  --border-default: #e2e8f0;
+
+  /* Layout */
+  --container-max-width: 1200px;
 }
+
+.dark {
+  --background: #070b17;
+  --foreground: #f8fafc;
+
+  --surface: #0f172a;
+  --surface-soft: #172033;
+  --surface-dark: #020617;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  --border-default: #263244;
+}
+
+/* =========================================================
+   TAILWIND THEME
+   ========================================================= */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-surface-dark: var(--surface-dark);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+
+  --color-border-default: var(--border-default);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   COMPONENTS
+   ========================================================= */
+
+@layer components {
+  /* -------------------------------------------------------
+     Layout
+     ------------------------------------------------------- */
+
+  .app-container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .app-container {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .app-container {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .app-container {
+      padding-inline: 3rem;
+    }
+  }
+
+  /* -------------------------------------------------------
+     Navigation
+     ------------------------------------------------------- */
+
+  .nav-link {
+    @apply text-sm font-medium text-text-secondary transition-colors duration-200;
+  }
+
+  .nav-link:hover {
+    @apply text-text-primary;
+  }
+
+  .nav-link:focus-visible {
+    @apply outline-2 outline-offset-4 outline-brand;
+  }
+
+  /* -------------------------------------------------------
+     Icon Button
+     ------------------------------------------------------- */
+
+  .icon-button {
+    @apply inline-flex size-10 items-center justify-center text-text-primary transition-colors duration-200;
+  }
+
+  .icon-button:hover {
+    @apply bg-surface-soft;
+  }
+
+  .icon-button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+  }
+
+  /* -------------------------------------------------------
+     Primary Button
+     ------------------------------------------------------- */
+
+  .primary-button {
+    @apply inline-flex items-center justify-center gap-2 bg-surface-dark px-5 py-3 text-sm font-medium text-white transition-colors duration-200;
+  }
+
+  .primary-button:hover {
+    @apply bg-brand;
+  }
+
+  .primary-button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+  }
 }
